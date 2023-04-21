@@ -18,32 +18,29 @@ class GameBloc extends Bloc<GameEvent, GameState> {
         checkedFields: [],
       ));
     });
-    on<ChangeGameStatusEvent>((event, emit) {});
+    on<ChangeGameStatusEvent>((event, emit) {
+      emit(state.copyWith(gameStatus: event.gameStatus));
+    });
     on<CheckFieldEvent>((event, emit) async {
-      final checkedFields = state.checkedFields;
-      final fields = state.fields;
-
-      if (checkedFields.isEmpty || checkedFields[0] != event.field) {
-        if (checkedFields.length < 2) {
-          emit(
-            state.copyWith(
-              checkedFields: List.of(state.checkedFields)..add(event.field),
-            ),
-          );
+      if (state.checkedFields.length < 2) {
+        if (state.checkedFields.isEmpty || state.checkedFields[0] != event.field) {
+          emit(state.copyWith(
+            checkedFields: List.of(state.checkedFields)..add(event.field),
+          ));
         }
       }
 
-      if (checkedFields.length == 2 && fields[checkedFields[0]] == fields[checkedFields[1]]) {
-        emit(
-          state.copyWith(
+      if (state.checkedFields.length == 2) {
+        if (state.fields[state.checkedFields[0]] == state.fields[state.checkedFields[1]]) {
+          emit(state.copyWith(
               uncoveredFields: List.of(state.uncoveredFields)
                 ..add(state.checkedFields[0])
                 ..add(state.checkedFields[1]),
-              checkedFields: []),
-        );
-      } else if (checkedFields.length == 2) {
-        await Future.delayed(const Duration(milliseconds: 500));
-        emit(state.copyWith(checkedFields: []));
+              checkedFields: []));
+        } else {
+          await Future.delayed(const Duration(milliseconds: 500));
+          emit(state.copyWith(checkedFields: []));
+        }
       }
     });
   }

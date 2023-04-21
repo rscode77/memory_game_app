@@ -1,9 +1,10 @@
+import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../config/constants.dart';
 
-class FieldWidget extends StatelessWidget {
+class FieldWidget extends StatefulWidget {
   final int index;
   final bool uncovered;
   final Function()? onPressed;
@@ -15,6 +16,13 @@ class FieldWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<FieldWidget> createState() => _FieldWidgetState();
+}
+
+class _FieldWidgetState extends State<FieldWidget> {
+  FlipCardController _flipFieldController = FlipCardController();
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       height: 90.h,
@@ -24,10 +32,10 @@ class FieldWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: NeumorphicButton(
-        style: uncovered ? coveredStyle() : uncoveredStyle(),
-        onPressed: onPressed,
+        style: widget.uncovered ? coveredStyle() : uncoveredStyle(),
+        onPressed: widget.onPressed,
         child: Center(
-          child: uncovered ? Text('$index') : null,
+          child: widget.uncovered ? Text('${widget.index}') : null,
         ),
       ),
     );
