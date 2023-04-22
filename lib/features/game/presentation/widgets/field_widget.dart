@@ -1,4 +1,3 @@
-import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -20,8 +19,6 @@ class FieldWidget extends StatefulWidget {
 }
 
 class _FieldWidgetState extends State<FieldWidget> {
-  FlipCardController _flipFieldController = FlipCardController();
-
   @override
   Widget build(BuildContext context) {
     return Container(

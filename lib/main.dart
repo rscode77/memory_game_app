@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:memory_game_app/features/game/presentation/blocs/bloc/game_bloc.dart';
+import 'package:memory_game_app/features/game/presentation/blocs/timer_cubit/timer_cubit.dart';
 
 import 'config/constants.dart';
 import 'config/routes.dart' as route;
+import 'features/game/presentation/blocs/game_bloc/game_bloc.dart';
 import 'features/splash_screen/blocs/bloc/splash_screen_bloc.dart';
 
 void main() {
@@ -22,51 +23,22 @@ class MyApp extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider(create: (context) => SplashScreenBloc()),
-            BlocProvider(create: (context) => GameBloc()..add(InitNewGameEvent())),
+            BlocProvider(create: (context) => GameBloc()),
+            BlocProvider(create: (context) => TimerCubit()),
           ],
           child: MaterialApp(
             title: 'MemoryGame',
             theme: ThemeData(
               textTheme: TextTheme(
-                titleLarge: GoogleFonts.lato(
+                titleLarge: GoogleFonts.roboto(
                   fontSize: 40,
                   fontWeight: FontWeight.w800,
                   color: black,
                 ),
-                titleSmall: GoogleFonts.lato(
-                  fontSize: 40,
-                  fontWeight: FontWeight.w400,
-                  color: black,
-                ),
-                headlineLarge: GoogleFonts.lato(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w800,
-                  color: black,
-                ),
-                headlineMedium: GoogleFonts.lato(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w800,
-                  color: Colors.white,
-                ),
-                headlineSmall: GoogleFonts.lato(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w800,
-                  color: black,
-                ),
-                labelLarge: GoogleFonts.lato(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                  color: black,
-                ),
-                labelMedium: GoogleFonts.lato(
-                  fontSize: 14,
+                displayLarge: GoogleFonts.roboto(
+                  fontSize: 23,
                   fontWeight: FontWeight.w500,
-                  color: black,
-                ),
-                labelSmall: GoogleFonts.roboto(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w800,
-                  color: black,
+                  color: Colors.white,
                 ),
               ),
             ),

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:memory_game_app/features/game/presentation/widgets/field_widget.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
+import 'package:memory_game_app/config/enums.dart';
 
-import '../blocs/bloc/game_bloc.dart';
+import '../blocs/game_bloc/game_bloc.dart';
+import '../blocs/timer_cubit/timer_cubit.dart';
+import '../widgets/game_fields.dart';
 
 class GameView extends StatelessWidget {
   const GameView({super.key});
@@ -11,31 +15,47 @@ class GameView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: SizedBox(
-        width: double.infinity,
-        child: BlocConsumer<GameBloc, GameState>(
-          listener: (context, gameState) {},
-          builder: (context, gameState) {
-            return gameState.fields.isEmpty
-                ? Container()
-                : Column(
-                    children: List.generate(
-                      5,
-                      (r) => Row(
-                        children: List.generate(
-                          4,
-                          (i) => FieldWidget(
-                            index: gameState.fields[r * 4 + i],
-                            uncovered: gameState.uncoveredFields.contains(r * 4 + i) || gameState.checkedFields.contains(r * 4 + i),
-                            onPressed: () => context.read<GameBloc>().add(CheckFieldEvent(field: r * 4 + i)),
-                          ),
-                        ),
-                      ),
-                    ),
+        child: SizedBox(
+          width: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Spacer(),
+              //game fields
+              BlocBuilder<GameBloc, GameState>(
+                builder: (context, gameState) {
+                  if (gameState.uncoveredFields.length == 20) {
+                    context.read<TimerCubit>().stop();
+                    context.read<GameBloc>().add(const ChangeGameStatusEvent(gameStatus: GameStatus.finished));
+                  }
+                  return gameState.fields.isEmpty ? Container() : GameFields(gameState: gameState);
+                },
+              ),
+              Gap(60.h),
+              //timer
+              BlocBuilder<TimerCubit, int>(
+                builder: (context, state) {
+                  return Column(
+                    children: [
+                      Text('Current time:'),
+                      Text('$state'),
+                    ],
                   );
-          },
+                },
+              ),
+              Spacer(),
+              ElevatedButton(
+                onPressed: () {
+                  context.read<GameBloc>().add(InitNewGameEvent());
+                  context.read<TimerCubit>().start();
+                },
+                child: Text('Start new game'),
+              ),
+              Gap(40.h),
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }

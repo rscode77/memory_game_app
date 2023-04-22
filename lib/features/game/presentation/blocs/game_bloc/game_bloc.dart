@@ -20,6 +20,9 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     });
     on<ChangeGameStatusEvent>((event, emit) {
       emit(state.copyWith(gameStatus: event.gameStatus));
+      if (state.gameStatus == GameStatus.finished) {
+        //save result to server
+      }
     });
     on<CheckFieldEvent>((event, emit) async {
       if (state.checkedFields.length < 2) {

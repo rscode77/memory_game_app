@@ -43,7 +43,7 @@ dependencies:
   flutter_neumorphic: ^3.2.0
   flutter_screenutil: ^5.7.0
   flutter_animate: ^4.1.1+1
-  flip_card: ^0.7.0
+  animated_flip_widget: ^0.0.2
 
 dev_dependencies:
   flutter_test:
