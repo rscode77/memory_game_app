@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:memory_game_app/features/game/data/repository/game_repository_impl.dart';
 
 import '../../../../../config/enums.dart';
 
@@ -18,11 +19,12 @@ class GameBloc extends Bloc<GameEvent, GameState> {
         checkedFields: [],
       ));
     });
-    on<ChangeGameStatusEvent>((event, emit) {
+    on<ChangeGameStatusEvent>((event, emit) async {
       emit(state.copyWith(gameStatus: event.gameStatus));
-      if (state.gameStatus == GameStatus.finished) {
-        //save result to server
-      }
+      if (state.gameStatus == GameStatus.finished) {}
+    });
+    on<UpdateUserRecord>((event, emit) async {
+      await GameRepositoryImpl().updateUserRecord(event.record);
     });
     on<CheckFieldEvent>((event, emit) async {
       if (state.checkedFields.length < 2) {

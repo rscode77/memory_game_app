@@ -27,6 +27,7 @@ class GameView extends StatelessWidget {
                   if (gameState.uncoveredFields.length == 20) {
                     context.read<TimerCubit>().stop();
                     context.read<GameBloc>().add(const ChangeGameStatusEvent(gameStatus: GameStatus.finished));
+                    context.read<GameBloc>().add(UpdateUserRecord(record: context.read<TimerCubit>().state));
                   }
                   return gameState.fields.isEmpty ? Container() : GameFields(gameState: gameState);
                 },

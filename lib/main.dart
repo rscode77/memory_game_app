@@ -7,7 +7,7 @@ import 'package:memory_game_app/features/game/presentation/blocs/timer_cubit/tim
 import 'config/constants.dart';
 import 'config/routes.dart' as route;
 import 'features/game/presentation/blocs/game_bloc/game_bloc.dart';
-import 'features/splash_screen/blocs/bloc/splash_screen_bloc.dart';
+import 'features/menu/presentation/blocs/user/user_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MultiBlocProvider(
           providers: [
-            BlocProvider(create: (context) => SplashScreenBloc()),
+            BlocProvider(create: (context) => UserBloc()..add(const AuthUserEvent())),
             BlocProvider(create: (context) => GameBloc()),
             BlocProvider(create: (context) => TimerCubit()),
           ],

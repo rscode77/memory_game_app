@@ -42,3 +42,14 @@ class UncoverFieldEvent extends GameEvent {
   @override
   List<Object> get props => [uncoveredFields];
 }
+
+class UpdateUserRecord extends GameEvent {
+  final int record;
+
+  const UpdateUserRecord({
+    required this.record,
+  });
+
+  @override
+  List<Object> get props => [record];
+}

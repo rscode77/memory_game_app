@@ -44,6 +44,7 @@ dependencies:
   flutter_screenutil: ^5.7.0
   flutter_animate: ^4.1.1+1
   animated_flip_widget: ^0.0.2
+  unique_identifier: ^0.3.0
 
 dev_dependencies:
   flutter_test:
