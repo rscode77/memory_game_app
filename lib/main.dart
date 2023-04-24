@@ -30,14 +30,14 @@ class MyApp extends StatelessWidget {
             title: 'MemoryGame',
             theme: ThemeData(
               textTheme: TextTheme(
-                titleLarge: GoogleFonts.roboto(
+                titleLarge: GoogleFonts.plusJakartaSans(
                   fontSize: 40,
-                  fontWeight: FontWeight.w800,
-                  color: black,
-                ),
-                displayLarge: GoogleFonts.roboto(
-                  fontSize: 23,
                   fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                ),
+                displayLarge: GoogleFonts.plusJakartaSans(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
                   color: Colors.white,
                 ),
               ),
