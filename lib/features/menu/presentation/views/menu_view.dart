@@ -7,12 +7,18 @@ import '../../../../config/routes.dart';
 import '../blocs/user/user_bloc.dart';
 import '../widget/loading_widget.dart';
 
-class SplashScreenView extends StatelessWidget {
+class SplashScreenView extends StatefulWidget {
   const SplashScreenView({super.key});
 
   @override
+  State<SplashScreenView> createState() => _SplashScreenViewState();
+}
+
+class _SplashScreenViewState extends State<SplashScreenView> {
+  TextEditingController userNameController = TextEditingController();
+
+  @override
   Widget build(BuildContext context) {
-    TextEditingController _userNameController = TextEditingController();
     print(MediaQuery.of(context).size.width);
     print(MediaQuery.of(context).size.height);
     return Scaffold(
@@ -34,9 +40,9 @@ class SplashScreenView extends StatelessWidget {
                           Column(
                               children: [
                                 Text('Set username'),
-                                TextField(controller: _userNameController),
+                                TextField(controller: userNameController),
                                 ElevatedButton(
-                                  onPressed: () => context.read<UserBloc>().add(AddUserEvent(name: _userNameController.text)),
+                                  onPressed: () => context.read<UserBloc>().add(AddUserEvent(name: userNameController.text)),
                                   child: Text('Start game'),
                                 ),
                               ],

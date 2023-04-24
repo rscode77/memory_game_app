@@ -35,11 +35,11 @@ class GameView extends StatelessWidget {
               Gap(60.h),
               //timer
               BlocBuilder<TimerCubit, int>(
-                builder: (context, state) {
+                builder: (context, timerState) {
                   return Column(
                     children: [
                       Text('Current time:'),
-                      Text('$state'),
+                      Text(formatedTime(timerState)),
                     ],
                   );
                 },
@@ -58,5 +58,10 @@ class GameView extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String formatedTime(int milliseconds) {
+    Duration duration = Duration(milliseconds: milliseconds);
+    return duration.toString().split('.').first;
   }
 }
