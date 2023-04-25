@@ -31,13 +31,43 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               textTheme: TextTheme(
                 titleLarge: GoogleFonts.plusJakartaSans(
-                  fontSize: 40,
+                  fontSize: 48.sp,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
+                ),
+                titleSmall: GoogleFonts.plusJakartaSans(
+                  fontSize: 15.sp,
                   fontWeight: FontWeight.w500,
                   color: Colors.white,
                 ),
+                titleMedium: GoogleFonts.plusJakartaSans(
+                  fontSize: 26.sp,
+                  fontWeight: FontWeight.w900,
+                  color: Colors.white,
+                ),
                 displayLarge: GoogleFonts.plusJakartaSans(
-                  fontSize: 13,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+                labelMedium: GoogleFonts.plusJakartaSans(
+                  fontSize: 24.sp,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+                labelSmall: GoogleFonts.plusJakartaSans(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                ),
+                displayMedium: GoogleFonts.plusJakartaSans(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+                headlineMedium: GoogleFonts.plusJakartaSans(
+                  fontSize: 33.sp,
+                  fontWeight: FontWeight.w700,
                   color: Colors.white,
                 ),
               ),

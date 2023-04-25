@@ -45,6 +45,7 @@ dependencies:
   flutter_animate: ^4.1.1+1
   animated_flip_widget: ^0.0.2
   unique_identifier: ^0.3.0
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:
@@ -69,21 +70,3 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
-  # fonts:
-  #   - family: Gilroy
-  #     fonts:
-  #       - asset: assets/fonts/Gilroy-Light.ttf
-  #         weight: 300
-  #       - asset: assets/fonts/Gilroy-Regular.ttf
-  #         weight: 400
-  #       - asset: assets/fonts/Gilroy-Medium.ttf
-  #         weight: 500
-  #       - asset: assets/fonts/Gilroy-SemiBold.ttf
-  #         weight: 600
-  #       - asset: assets/fonts/Gilroy-Bold.ttf
-  #         weight: 700
-  #       - asset: assets/fonts/Gilroy-ExtraBold.ttf
-  #         weight: 800
-  #       - asset: assets/fonts/Gilroy-Black.ttf
-  #         weight: 900

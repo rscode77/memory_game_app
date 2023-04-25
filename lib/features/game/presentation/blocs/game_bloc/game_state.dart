@@ -1,14 +1,17 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'game_bloc.dart';
 
 class GameState extends Equatable {
   final List<int> fields;
   final List<int> uncoveredFields;
   final List<int> checkedFields;
+  final List<User> leaderBoard;
   final GameStatus gameStatus;
   const GameState({
     required this.fields,
     required this.uncoveredFields,
     required this.checkedFields,
+    required this.leaderBoard,
     required this.gameStatus,
   });
 
@@ -26,6 +29,7 @@ class GameState extends Equatable {
       uncoveredFields: uncoveredFields ?? this.uncoveredFields,
       checkedFields: checkedFields ?? this.checkedFields,
       gameStatus: gameStatus ?? this.gameStatus,
+      leaderBoard: [],
     );
   }
 }

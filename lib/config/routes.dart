@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:memory_game_app/features/game/presentation/views/game_view.dart';
+import 'package:memory_game_app/features/game/presentation/views/leaderboard_view.dart';
 import 'package:memory_game_app/features/menu/presentation/views/menu_view.dart';
 
 const String splashScreenView = '/';
 const String gameView = '/game';
+const String leaderboardView = '/leaderBoard';
 
 Route<dynamic> controller(RouteSettings settings) {
   WidgetBuilder builder;
@@ -13,6 +15,9 @@ Route<dynamic> controller(RouteSettings settings) {
       break;
     case gameView:
       builder = (BuildContext _) => const GameView();
+      break;
+    case leaderboardView:
+      builder = (BuildContext _) => const LeaderboardView();
       break;
     default:
       throw ('Route does not exist');

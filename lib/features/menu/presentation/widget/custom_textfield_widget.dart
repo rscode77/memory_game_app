@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -40,16 +39,18 @@ class CustomTextField extends StatelessWidget {
             ],
           ),
         ),
-        Gap(10.h),
+        Gap(12.h),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 20.w),
-          height: 60.h,
+          height: 70.h,
           decoration: BoxDecoration(
             color: gray,
             borderRadius: BorderRadius.circular(17),
           ),
           child: TextField(
-            cursorHeight: 20,
+            cursorColor: blue,
+            cursorHeight: 18,
+            textAlignVertical: TextAlignVertical.center,
             decoration: InputDecoration(
               enabledBorder: const UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.transparent),

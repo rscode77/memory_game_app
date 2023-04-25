@@ -21,38 +21,26 @@ class FieldWidget extends StatefulWidget {
 class _FieldWidgetState extends State<FieldWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 90.h,
-      width: 90.w,
-      margin: const EdgeInsets.all(4),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: NeumorphicButton(
-        style: widget.uncovered ? coveredStyle() : uncoveredStyle(),
-        onPressed: widget.onPressed,
+    return InkWell(
+      onTap: widget.onPressed,
+      child: Container(
+        height: 90.h,
+        width: 90.w,
+        margin: const EdgeInsets.all(4),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(17),
+          color: widget.uncovered ? blue : gray,
+          border: Border.all(width: 4.5.sp, color: widget.uncovered ? Colors.transparent : lightGray.withOpacity(0.6)),
+        ),
         child: Center(
-          child: widget.uncovered ? Text('${widget.index}') : null,
+          child: widget.uncovered
+              ? Text(
+                  '${widget.index}',
+                  style: Theme.of(context).textTheme.titleMedium,
+                )
+              : null,
         ),
       ),
-    );
-  }
-
-  NeumorphicStyle? uncoveredStyle() {
-    return const NeumorphicStyle(
-      shape: NeumorphicShape.concave,
-      depth: 2,
-      lightSource: LightSource.topLeft,
-      color: Colors.white,
-    );
-  }
-
-  NeumorphicStyle? coveredStyle() {
-    return const NeumorphicStyle(
-      shape: NeumorphicShape.concave,
-      depth: 2,
-      lightSource: LightSource.topLeft,
-      color: blue,
     );
   }
 }

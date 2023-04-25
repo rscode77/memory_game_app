@@ -22,10 +22,12 @@ class GameFields extends StatelessWidget {
           children: List.generate(
             4,
             (i) => FieldWidget(
-              index: gameState.fields[r * 4 + i],
+              index: gameState.fields.isEmpty ? 0 : gameState.fields[r * 4 + i],
               uncovered: gameState.uncoveredFields.contains(r * 4 + i) || gameState.checkedFields.contains(r * 4 + i),
               onPressed: () {
-                context.read<GameBloc>().add(CheckFieldEvent(field: r * 4 + i));
+                if (gameState.fields.isNotEmpty) {
+                  context.read<GameBloc>().add(CheckFieldEvent(field: r * 4 + i));
+                }
               },
             ),
           ),

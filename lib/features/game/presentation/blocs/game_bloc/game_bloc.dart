@@ -3,14 +3,21 @@ import 'package:equatable/equatable.dart';
 import 'package:memory_game_app/features/game/data/repository/game_repository_impl.dart';
 
 import '../../../../../config/enums.dart';
+import '../../../../menu/data/entities/user.dart';
 
 part 'game_event.dart';
 part 'game_state.dart';
 
 class GameBloc extends Bloc<GameEvent, GameState> {
-  GameBloc() : super(const GameState(gameStatus: GameStatus.notInitiated, fields: [], uncoveredFields: [], checkedFields: [])) {
+  GameBloc()
+      : super(const GameState(gameStatus: GameStatus.notInitiated, fields: [], uncoveredFields: [], checkedFields: [], leaderBoard: [
+          User(id: 0, uniqueId: '', name: 'Spej', record: 50),
+          User(id: 0, uniqueId: '', name: 'Spej', record: 100),
+          User(id: 0, uniqueId: '', name: 'Spej', record: 200),
+          User(id: 0, uniqueId: '', name: 'Spej', record: 400),
+        ])) {
     on<InitNewGameEvent>((event, emit) {
-      List<int> fields = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10];
+      List<int> fields = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 0, 0];
       fields.shuffle();
       emit(state.copyWith(
         gameStatus: GameStatus.notInitiated,

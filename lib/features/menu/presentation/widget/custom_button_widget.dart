@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -5,27 +6,34 @@ import '../../../../config/constants.dart';
 
 class CustomButton extends StatelessWidget {
   final Function()? onPressed;
+  final IconData icon;
+  final String text;
+  final Color color;
+
   const CustomButton({
     Key? key,
     required this.onPressed,
+    required this.icon,
+    required this.text,
+    required this.color,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 60.h,
+      height: 70.h,
       width: double.infinity,
       child: ElevatedButton.icon(
         style: ElevatedButton.styleFrom(
-          backgroundColor: green,
+          backgroundColor: color,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(17)),
         ),
         onPressed: onPressed,
-        icon: const Icon(
-          Icons.start_rounded,
+        icon: Icon(
+          icon,
           size: 18,
         ),
-        label: Text('Login', style: Theme.of(context).textTheme.displayLarge),
+        label: Text(text, style: Theme.of(context).textTheme.displayLarge),
       ),
     );
   }
