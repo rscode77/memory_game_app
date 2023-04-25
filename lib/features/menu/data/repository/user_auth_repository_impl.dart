@@ -16,12 +16,12 @@ class UserAuthRepositoryImpl extends UserAuthRepository {
     });
 
     if (response.statusCode == 200) {
-      User userData = User.fromJson(response.body);
+      User userData = userFromJson(response.body);
       return User(
         uniqueId: userData.uniqueId,
-        id: userData.id,
         name: userData.name,
         record: userData.record,
+        rank: userData.rank,
       );
     } else {
       return null;

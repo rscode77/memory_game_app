@@ -16,7 +16,7 @@ class LeaderboardView extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 40.h),
+        padding: EdgeInsets.symmetric(horizontal: 40.w),
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [backgroundTop, backgroundBottom],
@@ -29,11 +29,12 @@ class LeaderboardView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Gap(40.h),
+            Gap(60.h),
             Row(
               children: [
+                Gap(10.w),
                 const Icon(
-                  size: 40,
+                  size: 28,
                   Icons.rocket_launch_rounded,
                   color: Colors.white,
                 )
@@ -46,7 +47,7 @@ class LeaderboardView extends StatelessWidget {
                 Gap(20.w),
                 Text(
                   'Leaderboard',
-                  style: Theme.of(context).textTheme.headlineMedium,
+                  style: Theme.of(context).textTheme.labelSmall,
                 ),
               ],
             ),
@@ -54,7 +55,7 @@ class LeaderboardView extends StatelessWidget {
               builder: (context, state) {
                 return ListView.builder(
                   shrinkWrap: true,
-                  itemCount: state.leaderBoard.length,
+                  itemCount: state.leaderboard.length,
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
@@ -77,13 +78,13 @@ class LeaderboardView extends StatelessWidget {
                             ),
                             Gap(20.w),
                             Text(
-                              state.leaderBoard[index].name,
-                              style: Theme.of(context).textTheme.labelMedium,
+                              state.leaderboard[index].name,
+                              style: Theme.of(context).textTheme.labelSmall,
                             ),
                             const Spacer(),
                             Text(
-                              state.leaderBoard[index].record.toString(),
-                              style: Theme.of(context).textTheme.labelMedium,
+                              formatedTime(state.leaderboard[index].record),
+                              style: Theme.of(context).textTheme.labelSmall,
                             ),
                           ],
                         ),
@@ -99,10 +100,16 @@ class LeaderboardView extends StatelessWidget {
               icon: Icons.arrow_back_rounded,
               text: 'Back',
               color: gray,
-            )
+            ),
+            Gap(40.h),
           ],
         ),
       ),
     );
+  }
+
+  String formatedTime(int milliseconds) {
+    Duration duration = Duration(milliseconds: milliseconds);
+    return duration.toString().split('.').first;
   }
 }

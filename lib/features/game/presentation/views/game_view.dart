@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:memory_game_app/config/enums.dart';
 import 'package:memory_game_app/config/routes.dart';
+import 'package:memory_game_app/features/menu/presentation/blocs/user/user_bloc.dart';
 
 import '../../../../config/constants.dart';
 import '../../../menu/presentation/widget/custom_button_widget.dart';
@@ -42,7 +43,33 @@ class GameView extends StatelessWidget {
                   context.read<GameBloc>().add(const ChangeGameStatusEvent(gameStatus: GameStatus.finished));
                   context.read<GameBloc>().add(UpdateUserRecord(record: context.read<TimerCubit>().state));
                 }
-                return GameFields(gameState: gameState);
+                return Column(
+                  children: [
+                    Row(
+                      children: [
+                        Gap(20.w),
+                        const Icon(
+                          Icons.rocket_launch_sharp,
+                          size: 28,
+                          color: Colors.white,
+                        )
+                            .animate(
+                              onPlay: (controller) => controller.repeat(
+                                period: const Duration(milliseconds: 5000),
+                              ),
+                            )
+                            .shake(),
+                        Gap(10.w),
+                        Text(
+                          'Current rank: #${gameState.currentRank == 0 ? 'not finished' : gameState.currentRank}',
+                          style: Theme.of(context).textTheme.labelSmall,
+                        )
+                      ],
+                    ),
+                    Gap(15.h),
+                    GameFields(gameState: gameState)
+                  ],
+                );
               },
             ),
             Gap(30.h),
@@ -79,7 +106,7 @@ class GameView extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Gap(20.w),
+                        Gap(45.w),
                       ],
                     ),
                   ],
@@ -101,7 +128,11 @@ class GameView extends StatelessWidget {
               color: gray,
               icon: Icons.rocket_launch_rounded,
               text: 'Leaderboard',
-              onPressed: () => Navigator.pushNamed(context, leaderboardView),
+              onPressed: () {
+                context.read<GameBloc>().add(GetUserRank(uniqueId: context.read<UserBloc>().state.user!.uniqueId));
+                context.read<GameBloc>().add(GetLeaderBoard());
+                Navigator.pushNamed(context, leaderboardView);
+              },
             ),
             Gap(40.h),
           ],

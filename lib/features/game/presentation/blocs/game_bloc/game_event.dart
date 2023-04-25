@@ -53,3 +53,23 @@ class UpdateUserRecord extends GameEvent {
   @override
   List<Object> get props => [record];
 }
+
+class UpdateRankEvent extends GameEvent {
+  final int rank;
+
+  const UpdateRankEvent({
+    required this.rank,
+  });
+
+  @override
+  List<Object> get props => [rank];
+}
+
+class GetLeaderBoard extends GameEvent {}
+
+class GetUserRank extends GameEvent {
+  final String uniqueId;
+  const GetUserRank({
+    required this.uniqueId,
+  });
+}

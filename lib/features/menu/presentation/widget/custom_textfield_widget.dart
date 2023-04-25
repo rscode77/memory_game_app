@@ -60,7 +60,7 @@ class CustomTextField extends StatelessWidget {
               ),
               hintText: hint,
               hintStyle: Theme.of(context).textTheme.displayLarge!.copyWith(
-                    color: darkGray,
+                    color: Colors.white.withOpacity(0.4),
                   ),
             ),
             controller: userNameController,

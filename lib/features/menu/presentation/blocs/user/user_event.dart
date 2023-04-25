@@ -18,11 +18,3 @@ class AddUserEvent extends UserEvent {
     required this.name,
   });
 }
-
-class UpdateUserRecord extends UserEvent {
-  final int record;
-
-  const UpdateUserRecord({
-    required this.record,
-  });
-}

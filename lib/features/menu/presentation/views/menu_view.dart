@@ -6,6 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:memory_game_app/config/constants.dart';
 
 import '../../../../config/routes.dart';
+import '../../../game/presentation/blocs/game_bloc/game_bloc.dart';
 import '../blocs/user/user_bloc.dart';
 import '../widget/custom_button_widget.dart';
 import '../widget/custom_textfield_widget.dart';
@@ -99,7 +100,10 @@ class _SplashScreenViewState extends State<SplashScreenView> {
                                             color: blue,
                                             icon: Icons.play_arrow_rounded,
                                             text: 'Start game',
-                                            onPressed: () => Navigator.pushNamedAndRemoveUntil(context, gameView, (route) => false),
+                                            onPressed: () {
+                                              context.read<GameBloc>().add(UpdateRankEvent(rank: context.read<UserBloc>().state.user!.rank));
+                                              Navigator.pushNamedAndRemoveUntil(context, gameView, (route) => false);
+                                            },
                                           ),
                                         ],
                                       ),
