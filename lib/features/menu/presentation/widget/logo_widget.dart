@@ -16,10 +16,10 @@ class LogoWidget extends StatefulWidget {
 }
 
 class _LogoWidgetState extends State<LogoWidget> {
-  int _number1 = 0;
-  int _number2 = 0;
-  int _number3 = 0;
-  int _number4 = 0;
+  // int _number1 = 0;
+  // int _number2 = 0;
+  // int _number3 = 0;
+  // int _number4 = 0;
 
   late Timer _timer;
   late Image logoImage;
@@ -28,8 +28,8 @@ class _LogoWidgetState extends State<LogoWidget> {
     super.initState();
     logoImage = Image.asset(
       'assets/images/memory_logo.png',
-      height: 190.h,
-      width: 190.w,
+      height: 200.h,
+      width: 200.w,
     );
     _timer = Timer.periodic(const Duration(seconds: 3), (_) => _generateNumber());
   }
@@ -51,30 +51,30 @@ class _LogoWidgetState extends State<LogoWidget> {
     return Stack(
       children: [
         logoImage,
-        //top left
-        LogoTextdWidget(
-          number1: _number1,
-          paddingTop: 28,
-          paddingLeft: 37,
-        ),
-        //top right
-        LogoTextdWidget(
-          number1: _number2,
-          paddingTop: 28,
-          paddingLeft: 139,
-        ),
-        //bottom right
-        LogoTextdWidget(
-          number1: _number3,
-          paddingTop: 130,
-          paddingLeft: 139,
-        ),
-        //bottom left
-        LogoTextdWidget(
-          number1: _number4,
-          paddingTop: 130,
-          paddingLeft: 37,
-        ),
+        // //top left
+        // LogoTextdWidget(
+        //   number1: _number1,
+        //   paddingTop: 28,
+        //   paddingLeft: 37,
+        // ),
+        // //top right
+        // LogoTextdWidget(
+        //   number1: _number2,
+        //   paddingTop: 28,
+        //   paddingLeft: 139,
+        // ),
+        // //bottom right
+        // LogoTextdWidget(
+        //   number1: _number3,
+        //   paddingTop: 130,
+        //   paddingLeft: 139,
+        // ),
+        // //bottom left
+        // LogoTextdWidget(
+        //   number1: _number4,
+        //   paddingTop: 130,
+        //   paddingLeft: 37,
+        // ),
       ],
     )
         .animate(
@@ -87,10 +87,10 @@ class _LogoWidgetState extends State<LogoWidget> {
 
   void _generateNumber() {
     setState(() {
-      _number1 = Random().nextInt(9);
-      _number2 = Random().nextInt(9);
-      _number3 = Random().nextInt(9);
-      _number4 = Random().nextInt(9);
+      // _number1 = Random().nextInt(9);
+      // _number2 = Random().nextInt(9);
+      // _number3 = Random().nextInt(9);
+      // _number4 = Random().nextInt(9);
     });
   }
 }

@@ -11,7 +11,7 @@ import '../entities/rank.dart';
 
 class GameRepositoryImpl extends GameRepository {
   @override
-  Future<ApiResponse> updateUserRecord(int record) async {
+  Future<ApiResponse> updateUserRecord(int record, int taps) async {
     String? uniqueMobileId = await UniqueIdentifier.serial;
     var url = Uri.parse(baseUrl + updateRecord);
 
@@ -20,6 +20,7 @@ class GameRepositoryImpl extends GameRepository {
     }, body: {
       'UniqueId': uniqueMobileId,
       'Record': '$record',
+      'Taps': '$taps',
     });
 
     int rank = 0;
@@ -32,8 +33,19 @@ class GameRepositoryImpl extends GameRepository {
   }
 
   @override
-  Future<List<User>> getLeaderboardList() async {
-    var url = Uri.parse(baseUrl + getLeaderboard);
+  Future<List<User>> getTimeLeaderboard() async {
+    var url = Uri.parse(baseUrl + timeLeaderboard);
+
+    var leaderboard = await http.get(url, headers: {
+      'Accept': 'application/json',
+    });
+
+    return leaderboardFromJson(leaderboard.body);
+  }
+
+  @override
+  Future<List<User>> getTapLeaderboard() async {
+    var url = Uri.parse(baseUrl + tapsLeaderboard);
 
     var leaderboard = await http.get(url, headers: {
       'Accept': 'application/json',

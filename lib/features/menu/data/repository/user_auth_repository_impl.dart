@@ -26,6 +26,7 @@ class UserAuthRepositoryImpl extends UserAuthRepository {
         name: userData.name,
         record: userData.record,
         rank: userData.rank,
+        taps: userData.taps,
       );
     } else {
       return null;

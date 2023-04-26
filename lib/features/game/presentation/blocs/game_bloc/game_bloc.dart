@@ -41,7 +41,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       }
     });
     on<UpdateUserRecord>((event, emit) async {
-      ApiResponse newRecord = await GameRepositoryImpl().updateUserRecord(event.record);
+      ApiResponse newRecord = await GameRepositoryImpl().updateUserRecord(event.record, state.totalTaps);
       if (newRecord.statusCode == 200) {
         emit(state.copyWith(currentRank: newRecord.response));
         GameRepositoryImpl().resultVibraion();
@@ -55,8 +55,9 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       emit(state.copyWith(currentRank: rank.rank));
     });
     on<GetLeaderBoard>((event, emit) async {
-      var leaderboard = await GameRepositoryImpl().getLeaderboardList();
-      emit(state.copyWith(timeLeaderboard: leaderboard));
+      var timeLeaderboard = await GameRepositoryImpl().getTimeLeaderboard();
+      var tapLeaderboard = await GameRepositoryImpl().getTapLeaderboard();
+      emit(state.copyWith(timeLeaderboard: timeLeaderboard, tapLeaderboard: tapLeaderboard));
     });
     on<CheckFieldEvent>(
       (event, emit) async {

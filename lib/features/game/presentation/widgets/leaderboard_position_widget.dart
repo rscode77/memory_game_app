@@ -3,16 +3,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
 import '../../../../config/constants.dart';
+import '../../../../config/enums.dart';
 import '../blocs/game_bloc/game_bloc.dart';
 
 class LeaderboardPositionWidget extends StatelessWidget {
   final int position;
   final GameState gameState;
+  final LeaderboardType leaderboardType;
 
   const LeaderboardPositionWidget({
     Key? key,
     required this.position,
     required this.gameState,
+    required this.leaderboardType,
   }) : super(key: key);
 
   @override
@@ -38,12 +41,14 @@ class LeaderboardPositionWidget extends StatelessWidget {
             ),
             Gap(20.w),
             Text(
-              gameState.timeLeaderboard[position].name,
+              leaderboardType == LeaderboardType.time ? gameState.timeLeaderboard[position].name : gameState.tapLeaderboard[position].name,
               style: Theme.of(context).textTheme.labelSmall,
             ),
             const Spacer(),
             Text(
-              formatedTime(gameState.timeLeaderboard[position].record!),
+              leaderboardType == LeaderboardType.time
+                  ? formatedTime(gameState.timeLeaderboard[position].record!)
+                  : gameState.tapLeaderboard[position].taps.toString(),
               style: Theme.of(context).textTheme.labelSmall,
             ),
           ],

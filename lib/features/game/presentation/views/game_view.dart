@@ -59,16 +59,17 @@ class GameView extends StatelessWidget {
               },
             ),
             Gap(30.h),
-            //timer
             BlocBuilder<TimerCubit, TimerState>(
               builder: (context, timerState) {
                 return Column(
                   children: [
+                    //timer
                     TimerWidget(
                       time: timerState.time,
                       status: timerState.status,
                     ),
                     Gap(35.h),
+                    //start game button
                     CustomButton(
                       color: timerState.status == TimerStatus.ticking ? gray : blue,
                       icon: timerState.status == TimerStatus.ticking ? Icons.stop_rounded : Icons.play_arrow_rounded,
@@ -86,6 +87,7 @@ class GameView extends StatelessWidget {
                       },
                     ),
                     Gap(15.h),
+                    //leaderboard button
                     CustomButton(
                       color: gray,
                       icon: Icons.rocket_launch_rounded,

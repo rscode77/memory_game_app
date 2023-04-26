@@ -41,17 +41,19 @@ class CustomTextField extends StatelessWidget {
         ),
         Gap(12.h),
         Container(
+          alignment: Alignment.center,
           padding: EdgeInsets.symmetric(horizontal: 20.w),
-          height: 60.h,
+          height: 55.h,
           decoration: BoxDecoration(
             color: gray,
             borderRadius: BorderRadius.circular(17),
           ),
           child: TextField(
+            maxLines: 1,
             cursorColor: blue,
             cursorHeight: 18,
-            textAlignVertical: TextAlignVertical.center,
             decoration: InputDecoration(
+              contentPadding: EdgeInsets.zero,
               enabledBorder: const UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.transparent),
               ),

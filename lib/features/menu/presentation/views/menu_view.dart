@@ -26,8 +26,8 @@ class _SplashScreenViewState extends State<SplashScreenView> {
   bool man = true;
   @override
   Widget build(BuildContext context) {
-    print(MediaQuery.of(context).size.width);
-    print(MediaQuery.of(context).size.height);
+    // print(MediaQuery.of(context).size.width);
+    // print(MediaQuery.of(context).size.height);
     return Scaffold(
       body: LayoutBuilder(
         builder: (context, constraints) {

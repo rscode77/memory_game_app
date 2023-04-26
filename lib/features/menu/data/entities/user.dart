@@ -15,12 +15,14 @@ class User {
   String name;
   int? record;
   int? rank;
+  int? taps;
 
   User({
     required this.uniqueId,
     required this.name,
     required this.record,
     required this.rank,
+    required this.taps,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -28,5 +30,6 @@ class User {
         name: json["name"],
         record: json["record"],
         rank: json["rank"] ?? 0,
+        taps: json["taps"] ?? 0,
       );
 }
