@@ -6,7 +6,9 @@ import 'package:gap/gap.dart';
 import 'package:memory_game_app/features/menu/presentation/widget/custom_button_widget.dart';
 
 import '../../../../config/constants.dart';
+import '../../../menu/presentation/blocs/user/user_bloc.dart';
 import '../blocs/game_bloc/game_bloc.dart';
+import '../widgets/leaderboard_position_widget.dart';
 
 class LeaderboardView extends StatelessWidget {
   const LeaderboardView({super.key});
@@ -16,13 +18,14 @@ class LeaderboardView extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Container(
+        constraints: BoxConstraints(maxWidth: 400.w),
         padding: EdgeInsets.symmetric(horizontal: 40.w),
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [backgroundTop, backgroundBottom],
             stops: [0.03, 0.9],
             begin: Alignment.topLeft,
-            end: Alignment.centerRight,
+            end: Alignment.bottomCenter,
           ),
         ),
         width: double.infinity,
@@ -51,44 +54,28 @@ class LeaderboardView extends StatelessWidget {
                 ),
               ],
             ),
+            Gap(20.h),
+            Row(
+              children: [
+                Text(
+                  'User: ',
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
+                Text(
+                  context.read<UserBloc>().state.user!.name,
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
+              ],
+            ),
             BlocBuilder<GameBloc, GameState>(
               builder: (context, state) {
                 return ListView.builder(
                   shrinkWrap: true,
-                  itemCount: state.leaderboard.length,
+                  itemCount: state.timeLeaderboard.length,
                   itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        Gap(15.h),
-                        Row(
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                color: index < 3 ? blue : gray,
-                                borderRadius: BorderRadius.circular(17),
-                              ),
-                              width: 65.w,
-                              height: 65.h,
-                              child: Center(
-                                child: Text(
-                                  '#${index + 1}',
-                                  style: Theme.of(context).textTheme.displayMedium,
-                                ),
-                              ),
-                            ),
-                            Gap(20.w),
-                            Text(
-                              state.leaderboard[index].name,
-                              style: Theme.of(context).textTheme.labelSmall,
-                            ),
-                            const Spacer(),
-                            Text(
-                              formatedTime(state.leaderboard[index].record),
-                              style: Theme.of(context).textTheme.labelSmall,
-                            ),
-                          ],
-                        ),
-                      ],
+                    return LeaderboardPositionWidget(
+                      gameState: state,
+                      position: index,
                     );
                   },
                 );

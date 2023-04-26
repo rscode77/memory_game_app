@@ -1,9 +1,13 @@
-import 'package:memory_game_app/features/menu/data/entities/user.dart';
+// ignore: depend_on_referenced_packages
+import 'package:http/http.dart' as http;
+import 'package:memory_game_app/features/game/data/entities/api_response.dart';
 import 'package:unique_identifier/unique_identifier.dart';
+
+import 'package:memory_game_app/features/menu/data/entities/user.dart';
+import 'package:vibration/vibration.dart';
 
 import '../../../../config/api_contants.dart';
 import '../../domain/user_auth_repository.dart';
-import 'package:http/http.dart' as http;
 
 class UserAuthRepositoryImpl extends UserAuthRepository {
   @override
@@ -29,7 +33,7 @@ class UserAuthRepositoryImpl extends UserAuthRepository {
   }
 
   @override
-  Future<User?> addUser({required String name}) async {
+  Future<ApiResponse> addUser({required String name}) async {
     String? uniqueMobileId = await UniqueIdentifier.serial;
     var url = Uri.parse(baseUrl + addNewUser);
 
@@ -38,10 +42,11 @@ class UserAuthRepositoryImpl extends UserAuthRepository {
       'Name': name,
     });
 
-    if (response.statusCode == 200) {
-      authUser();
-    }
+    return ApiResponse(statusCode: response.statusCode, response: response.body);
+  }
 
-    return null;
+  @override
+  void errorVibration() {
+    Vibration.vibrate(amplitude: 255, duration: 100);
   }
 }

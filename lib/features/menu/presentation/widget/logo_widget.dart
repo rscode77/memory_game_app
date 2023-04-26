@@ -22,10 +22,15 @@ class _LogoWidgetState extends State<LogoWidget> {
   int _number4 = 0;
 
   late Timer _timer;
-
+  late Image logoImage;
   @override
   void initState() {
     super.initState();
+    logoImage = Image.asset(
+      'assets/images/memory_logo.png',
+      height: 190.h,
+      width: 190.w,
+    );
     _timer = Timer.periodic(const Duration(seconds: 3), (_) => _generateNumber());
   }
 
@@ -36,33 +41,39 @@ class _LogoWidgetState extends State<LogoWidget> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    precacheImage(logoImage.image, context);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Image.asset(
-          'assets/images/memory_logo.png',
-          height: 250.h,
-          width: 250.w,
-        ),
+        logoImage,
+        //top left
         LogoTextdWidget(
           number1: _number1,
-          paddingTop: 40,
-          paddingLeft: 48,
+          paddingTop: 28,
+          paddingLeft: 37,
         ),
+        //top right
         LogoTextdWidget(
           number1: _number2,
-          paddingTop: 40,
-          paddingLeft: 182,
+          paddingTop: 28,
+          paddingLeft: 139,
         ),
+        //bottom right
         LogoTextdWidget(
           number1: _number3,
-          paddingTop: 170,
-          paddingLeft: 182,
+          paddingTop: 130,
+          paddingLeft: 139,
         ),
+        //bottom left
         LogoTextdWidget(
           number1: _number4,
-          paddingTop: 170,
-          paddingLeft: 48,
+          paddingTop: 130,
+          paddingLeft: 37,
         ),
       ],
     )

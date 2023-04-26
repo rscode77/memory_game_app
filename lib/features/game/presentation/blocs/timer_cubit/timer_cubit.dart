@@ -1,27 +1,28 @@
 import 'dart:async';
+
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-enum TimerStatus { ticking, off }
+import '../../../../../config/enums.dart';
 
-class TimerCubit extends Cubit<int> {
-  TimerCubit() : super(0);
+part 'timer_state.dart';
+
+class TimerCubit extends Cubit<TimerState> {
+  TimerCubit() : super(const TimerState(status: TimerStatus.off, time: 0));
 
   late Timer _timer;
-  late TimerStatus timerStatus;
 
   void start() => {
-        state > 0 ? {stop(), reset()} : emit(0),
-        timerStatus = TimerStatus.ticking,
+        state.time > 0 ? {stop(), reset()} : emit(state.copyWith(time: 0)),
         _timer = Timer.periodic(const Duration(milliseconds: 100), (timer) {
-          emit(state + 100);
+          emit(state.copyWith(time: state.time + 100, status: TimerStatus.ticking));
         })
       };
   void stop() => {
         _timer.cancel(),
-        timerStatus = TimerStatus.off,
+        emit(state.copyWith(status: TimerStatus.off)),
       };
   void reset() => {
-        emit(0),
-        timerStatus = TimerStatus.off,
+        emit(state.copyWith(time: 0, status: TimerStatus.off)),
       };
 }

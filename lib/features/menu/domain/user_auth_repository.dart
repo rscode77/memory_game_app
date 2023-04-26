@@ -1,6 +1,8 @@
+import '../../game/data/entities/api_response.dart';
 import '../data/entities/user.dart';
 
 abstract class UserAuthRepository {
   Future<User?> authUser();
-  Future<User?> addUser({required String name});
+  Future<ApiResponse> addUser({required String name});
+  void errorVibration();
 }

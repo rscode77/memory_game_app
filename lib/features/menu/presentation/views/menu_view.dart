@@ -34,8 +34,8 @@ class _SplashScreenViewState extends State<SplashScreenView> {
           return SingleChildScrollView(
             child: ConstrainedBox(
               constraints: BoxConstraints(
-                minWidth: constraints.maxWidth,
                 minHeight: constraints.maxHeight,
+                maxWidth: 400.w,
               ),
               child: IntrinsicHeight(
                 child: Container(
@@ -45,72 +45,67 @@ class _SplashScreenViewState extends State<SplashScreenView> {
                       colors: [backgroundTop, backgroundBottom],
                       stops: [0.03, 0.9],
                       begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
+                      end: Alignment.bottomCenter,
                     ),
                   ),
                   width: double.infinity,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      const Spacer(flex: 2),
                       const LogoWidget(),
-                      const Spacer(),
+                      Gap(60.h),
                       const TextCarousel(),
+                      Gap(20.h),
                       BlocBuilder<UserBloc, UserState>(
                         builder: (context, userState) {
                           return userState.loading
                               ?
                               //loading
-                              SizedBox(height: 70.h, child: const LoadingWidget())
+                              const LoadingWidget()
                               : userState.user == null
                                   ?
                                   //user not authenticated
-                                  SizedBox(
-                                      height: 195.h,
-                                      child: Column(
-                                        children: [
-                                          CustomTextField(
-                                            userNameController: userNameController,
-                                            hint: 'Username',
-                                            icon: Icons.person,
-                                            textFieldTitle: 'Type username',
-                                          ),
-                                          Gap(20.h),
-                                          CustomButton(
-                                            color: blue,
-                                            icon: Icons.person_add_alt_1_rounded,
-                                            text: 'Add user',
-                                            onPressed: () {
-                                              if (userNameController.text.isNotEmpty) {
-                                                context.read<UserBloc>().add(AddUserEvent(name: userNameController.text));
-                                              }
-                                            },
-                                          ),
-                                        ],
-                                      ),
+                                  Column(
+                                      children: [
+                                        CustomTextField(
+                                          userNameController: userNameController,
+                                          hint: 'Username',
+                                          icon: Icons.person,
+                                          textFieldTitle: userState.userExists ? 'Username already exists' : 'Type username',
+                                        ),
+                                        Gap(20.h),
+                                        CustomButton(
+                                          color: blue,
+                                          icon: Icons.person_add_alt_1_rounded,
+                                          text: 'Add user',
+                                          onPressed: () {
+                                            if (userNameController.text.isNotEmpty) {
+                                              context.read<UserBloc>().add(AddUserEvent(name: userNameController.text));
+                                            }
+                                          },
+                                        ),
+                                        Gap(40.h),
+                                      ],
                                     )
                                   :
                                   //user authenticated
-                                  SizedBox(
-                                      height: 70.h,
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.end,
-                                        children: [
-                                          CustomButton(
-                                            color: blue,
-                                            icon: Icons.play_arrow_rounded,
-                                            text: 'Start game',
-                                            onPressed: () {
-                                              context.read<GameBloc>().add(UpdateRankEvent(rank: context.read<UserBloc>().state.user!.rank));
-                                              Navigator.pushNamedAndRemoveUntil(context, gameView, (route) => false);
-                                            },
-                                          ),
-                                        ],
-                                      ),
+                                  Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        CustomButton(
+                                          color: blue,
+                                          icon: Icons.play_arrow_rounded,
+                                          text: 'Start game',
+                                          onPressed: () {
+                                            context.read<GameBloc>().add(UpdateRankEvent(rank: context.read<UserBloc>().state.user!.rank!));
+                                            Navigator.pushNamedAndRemoveUntil(context, gameView, (route) => false);
+                                          },
+                                        ),
+                                        Gap(40.h),
+                                      ],
                                     );
                         },
                       ),
-                      Gap(40.h),
                     ],
                   ),
                 ),

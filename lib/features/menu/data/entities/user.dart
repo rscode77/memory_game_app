@@ -13,8 +13,8 @@ User userFromJson(String str) {
 class User {
   String uniqueId;
   String name;
-  int record;
-  int rank;
+  int? record;
+  int? rank;
 
   User({
     required this.uniqueId,

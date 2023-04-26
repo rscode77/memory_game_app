@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:memory_game_app/config/constants.dart';
 import 'package:memory_game_app/features/game/presentation/blocs/timer_cubit/timer_cubit.dart';
 
-import 'config/constants.dart';
 import 'config/routes.dart' as route;
 import 'features/game/presentation/blocs/game_bloc/game_bloc.dart';
 import 'features/menu/presentation/blocs/user/user_bloc.dart';
 
 void main() {
   runApp(const MyApp());
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    systemNavigationBarColor: backgroundBottom,
+    systemNavigationBarDividerColor: backgroundBottom,
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -18,7 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(500, 932),
+      designSize: const Size(392.72727272727275, 825.4545454545455),
       builder: (context, child) {
         return MultiBlocProvider(
           providers: [
@@ -31,7 +36,7 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               textTheme: TextTheme(
                 titleLarge: GoogleFonts.plusJakartaSans(
-                  fontSize: 48.sp,
+                  fontSize: 40.sp,
                   fontWeight: FontWeight.w700,
                   color: Colors.white,
                 ),
@@ -41,27 +46,27 @@ class MyApp extends StatelessWidget {
                   color: Colors.white,
                 ),
                 titleMedium: GoogleFonts.plusJakartaSans(
-                  fontSize: 26.sp,
+                  fontSize: 22.sp,
                   fontWeight: FontWeight.w900,
                   color: Colors.white,
                 ),
                 displayLarge: GoogleFonts.plusJakartaSans(
-                  fontSize: 16.sp,
+                  fontSize: 13.sp,
                   fontWeight: FontWeight.w600,
                   color: Colors.white,
                 ),
                 labelMedium: GoogleFonts.plusJakartaSans(
-                  fontSize: 24.sp,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w600,
                   color: Colors.white,
                 ),
                 labelSmall: GoogleFonts.plusJakartaSans(
-                  fontSize: 20.sp,
+                  fontSize: 15.sp,
                   fontWeight: FontWeight.w500,
                   color: Colors.white,
                 ),
                 displayMedium: GoogleFonts.plusJakartaSans(
-                  fontSize: 20.sp,
+                  fontSize: 17.sp,
                   fontWeight: FontWeight.w600,
                   color: Colors.white,
                 ),

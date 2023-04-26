@@ -42,7 +42,7 @@ class CustomTextField extends StatelessWidget {
         Gap(12.h),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 20.w),
-          height: 70.h,
+          height: 60.h,
           decoration: BoxDecoration(
             color: gray,
             borderRadius: BorderRadius.circular(17),

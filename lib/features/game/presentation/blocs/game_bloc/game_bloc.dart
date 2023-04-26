@@ -17,9 +17,12 @@ class GameBloc extends Bloc<GameEvent, GameState> {
           fields: [],
           uncoveredFields: [],
           checkedFields: [],
-          leaderboard: [],
+          timeLeaderboard: [],
           currentRank: 0,
+          totalTaps: 0,
+          tapLeaderboard: [],
         )) {
+    bool lock = false;
     on<InitNewGameEvent>((event, emit) {
       List<int> fields = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 0, 0];
       fields.shuffle();
@@ -28,16 +31,20 @@ class GameBloc extends Bloc<GameEvent, GameState> {
         fields: fields,
         uncoveredFields: [],
         checkedFields: [],
+        totalTaps: 0,
       ));
     });
     on<ChangeGameStatusEvent>((event, emit) async {
       emit(state.copyWith(gameStatus: event.gameStatus));
-      if (state.gameStatus == GameStatus.finished) {}
+      if (state.gameStatus == GameStatus.notInitiated) {
+        emit(state.copyWith(gameStatus: GameStatus.notInitiated, fields: [], uncoveredFields: [], checkedFields: []));
+      }
     });
     on<UpdateUserRecord>((event, emit) async {
       ApiResponse newRecord = await GameRepositoryImpl().updateUserRecord(event.record);
       if (newRecord.statusCode == 200) {
         emit(state.copyWith(currentRank: newRecord.response));
+        GameRepositoryImpl().resultVibraion();
       }
     });
     on<UpdateRankEvent>((event, emit) async {
@@ -49,29 +56,42 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     });
     on<GetLeaderBoard>((event, emit) async {
       var leaderboard = await GameRepositoryImpl().getLeaderboardList();
-      emit(state.copyWith(leaderboard: leaderboard));
+      emit(state.copyWith(timeLeaderboard: leaderboard));
     });
-    on<CheckFieldEvent>((event, emit) async {
-      if (state.checkedFields.length < 2) {
-        if (state.checkedFields.isEmpty || state.checkedFields[0] != event.field) {
-          emit(state.copyWith(
-            checkedFields: List.of(state.checkedFields)..add(event.field),
-          ));
+    on<CheckFieldEvent>(
+      (event, emit) async {
+        if (lock) {
+          return;
         }
-      }
 
-      if (state.checkedFields.length == 2) {
-        if (state.fields[state.checkedFields[0]] == state.fields[state.checkedFields[1]]) {
-          emit(state.copyWith(
-              uncoveredFields: List.of(state.uncoveredFields)
-                ..add(state.checkedFields[0])
-                ..add(state.checkedFields[1]),
-              checkedFields: []));
-        } else {
-          await Future.delayed(const Duration(milliseconds: 500));
-          emit(state.copyWith(checkedFields: []));
+        GameRepositoryImpl().tapVibraion();
+
+        if (state.checkedFields.length < 2) {
+          if (state.checkedFields.isEmpty || state.checkedFields[0] != event.field) {
+            emit(state.copyWith(
+              checkedFields: List.of(state.checkedFields)..add(event.field),
+              totalTaps: state.totalTaps + 1,
+            ));
+          }
         }
-      }
-    });
+
+        if (state.checkedFields.length == 2) {
+          if (state.fields[state.checkedFields[0]] == state.fields[state.checkedFields[1]]) {
+            emit(state.copyWith(
+                uncoveredFields: List.of(state.uncoveredFields)
+                  ..add(state.checkedFields[0])
+                  ..add(state.checkedFields[1]),
+                checkedFields: []));
+          } else {
+            lock = true;
+
+            await Future.delayed(const Duration(milliseconds: 500)).then((value) {
+              emit(state.copyWith(checkedFields: []));
+              lock = false;
+            });
+          }
+        }
+      },
+    );
   }
 }

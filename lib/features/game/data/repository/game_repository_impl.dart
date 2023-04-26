@@ -1,7 +1,9 @@
 import 'package:memory_game_app/features/game/data/entities/api_response.dart';
 import 'package:memory_game_app/features/menu/data/entities/user.dart';
 import 'package:unique_identifier/unique_identifier.dart';
+// ignore: depend_on_referenced_packages
 import 'package:http/http.dart' as http;
+import 'package:vibration/vibration.dart';
 
 import '../../../../config/api_contants.dart';
 import '../../repository/game_repository.dart';
@@ -51,5 +53,16 @@ class GameRepositoryImpl extends GameRepository {
     });
 
     return rankFromJson(rank.body);
+  }
+
+  @override
+  void resultVibraion() {
+    Vibration.vibrate(amplitude: 255, duration: 150);
+    Vibration.vibrate(amplitude: 255, duration: 150);
+  }
+
+  @override
+  void tapVibraion() {
+    Vibration.vibrate(amplitude: 150, duration: 100);
   }
 }

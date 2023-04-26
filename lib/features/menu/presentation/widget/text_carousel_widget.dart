@@ -14,9 +14,9 @@ class TextCarousel extends StatefulWidget {
 class _TextCarouselState extends State<TextCarousel> {
   int actualSlide = 0;
   List<Map<String, Object>> appDescription = [
-    {'id': 0, 'text': 'Control and track what you spend your money on.'},
-    {'id': 1, 'text': 'Lorem Ipsum is simply dummy text of the printing.'},
-    {'id': 2, 'text': 'Lorem Ipsum is not simply random text.'},
+    {'id': 0, 'text': 'Memory Game is a classic game of memory that challenges players to uncover matching pairs.'},
+    {'id': 1, 'text': 'Players must use their memory skills to flip over tiles and uncover pairs of matching tiles.'},
+    {'id': 2, 'text': 'Quickly uncover all of the tiles and check your rank in the leaderboard.'},
   ];
 
   @override
@@ -38,7 +38,7 @@ class _TextCarouselState extends State<TextCarousel> {
               Padding(
                   padding: EdgeInsets.only(right: 8.w),
                   child: Container(
-                    height: 5.h,
+                    height: 4.h,
                     width: 28.w,
                     decoration: BoxDecoration(
                       color: actualSlide == i['id'] as int ? Colors.white : Colors.white24,

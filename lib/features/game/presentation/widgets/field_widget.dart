@@ -24,8 +24,8 @@ class _FieldWidgetState extends State<FieldWidget> {
     return InkWell(
       onTap: widget.onPressed,
       child: Container(
-        height: 90.h,
-        width: 90.w,
+        height: 70.h,
+        width: 70.w,
         margin: const EdgeInsets.all(4),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(17),
