@@ -13,7 +13,7 @@ class LoadingWidget extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Gap(15.h),
+        Gap(5.h),
         SizedBox(
           height: 50.h,
           width: 50.w,

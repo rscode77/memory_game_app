@@ -21,31 +21,35 @@ class GameBloc extends Bloc<GameEvent, GameState> {
           currentRank: 0,
           totalTaps: 0,
           tapLeaderboard: [],
+          recordStatus: RecordStatus.notBroken,
         )) {
     bool lock = false;
     on<InitNewGameEvent>((event, emit) {
       List<int> fields = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 0, 0];
       fields.shuffle();
       emit(state.copyWith(
-        gameStatus: GameStatus.notInitiated,
+        gameStatus: GameStatus.started,
         fields: fields,
         uncoveredFields: [],
         checkedFields: [],
         totalTaps: 0,
+        recordStatus: RecordStatus.notBroken,
       ));
     });
     on<ChangeGameStatusEvent>((event, emit) async {
       emit(state.copyWith(gameStatus: event.gameStatus));
       if (state.gameStatus == GameStatus.notInitiated) {
-        emit(state.copyWith(gameStatus: GameStatus.notInitiated, fields: [], uncoveredFields: [], checkedFields: []));
+        emit(state.copyWith(fields: [], uncoveredFields: [], checkedFields: []));
       }
     });
     on<UpdateUserRecord>((event, emit) async {
       ApiResponse newRecord = await GameRepositoryImpl().updateUserRecord(event.record, state.totalTaps);
       if (newRecord.statusCode == 200) {
-        emit(state.copyWith(currentRank: newRecord.response));
+        emit(state.copyWith(currentRank: newRecord.response, gameStatus: GameStatus.stoped, recordStatus: RecordStatus.newRecord));
         GameRepositoryImpl().resultVibraion();
+        return;
       }
+      emit(state.copyWith(gameStatus: GameStatus.stoped, recordStatus: RecordStatus.notBroken));
     });
     on<UpdateRankEvent>((event, emit) async {
       emit(state.copyWith(currentRank: event.rank));

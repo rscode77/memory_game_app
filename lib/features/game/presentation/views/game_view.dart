@@ -1,4 +1,8 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -13,6 +17,7 @@ import '../blocs/game_bloc/game_bloc.dart';
 import '../blocs/timer_cubit/timer_cubit.dart';
 import '../widgets/current_rank_widget.dart';
 import '../widgets/game_fields.dart';
+import '../widgets/modal_bottom_sheet.dart';
 import '../widgets/timer_widget.dart';
 
 class GameView extends StatelessWidget {
@@ -39,13 +44,29 @@ class GameView extends StatelessWidget {
           children: [
             const Spacer(),
             //game fields
-            BlocBuilder<GameBloc, GameState>(
+            BlocConsumer<GameBloc, GameState>(
+              listenWhen: (previous, current) {
+                if (previous.gameStatus == GameStatus.finished && current.gameStatus == GameStatus.stoped) {
+                  Future.delayed(const Duration(milliseconds: 100), () {
+                    showModalBottomSheet<void>(
+                      backgroundColor: Colors.transparent,
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const ModalBottomSheet();
+                      },
+                    );
+                  });
+                }
+                return true;
+              },
+              listener: (context, gameListenerState) {},
               builder: (context, gameState) {
-                if (gameState.uncoveredFields.length == 20) {
+                if (gameState.uncoveredFields.length == 20 && gameState.gameStatus == GameStatus.started) {
                   context.read<TimerCubit>().stop();
                   context.read<GameBloc>().add(const ChangeGameStatusEvent(gameStatus: GameStatus.finished));
                   context.read<GameBloc>().add(UpdateUserRecord(record: context.read<TimerCubit>().state.time));
                 }
+
                 return Column(
                   children: [
                     CurrentRank(

@@ -10,6 +10,8 @@ class GameState extends Equatable {
   final int currentRank;
   final int totalTaps;
   final GameStatus gameStatus;
+  final RecordStatus recordStatus;
+
   const GameState({
     required this.fields,
     required this.uncoveredFields,
@@ -19,10 +21,11 @@ class GameState extends Equatable {
     required this.currentRank,
     required this.totalTaps,
     required this.gameStatus,
+    required this.recordStatus,
   });
 
   @override
-  List<Object> get props => [gameStatus, fields, uncoveredFields, checkedFields, currentRank, timeLeaderboard, tapLeaderboard, totalTaps];
+  List<Object> get props => [gameStatus, fields, uncoveredFields, checkedFields, currentRank, timeLeaderboard, tapLeaderboard, totalTaps, recordStatus];
 
   GameState copyWith({
     List<int>? fields,
@@ -33,6 +36,7 @@ class GameState extends Equatable {
     List<User>? timeLeaderboard,
     List<User>? tapLeaderboard,
     int? totalTaps,
+    RecordStatus? recordStatus,
   }) {
     return GameState(
       fields: fields ?? this.fields,
@@ -43,6 +47,7 @@ class GameState extends Equatable {
       tapLeaderboard: tapLeaderboard ?? this.tapLeaderboard,
       currentRank: currentRank ?? this.currentRank,
       totalTaps: totalTaps ?? this.totalTaps,
+      recordStatus: recordStatus ?? this.recordStatus,
     );
   }
 }

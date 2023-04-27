@@ -51,7 +51,6 @@ class CustomTextField extends StatelessWidget {
           child: TextField(
             maxLines: 1,
             cursorColor: blue,
-            cursorHeight: 18,
             decoration: InputDecoration(
               contentPadding: EdgeInsets.zero,
               enabledBorder: const UnderlineInputBorder(
