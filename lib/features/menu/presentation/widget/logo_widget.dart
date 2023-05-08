@@ -28,7 +28,7 @@ class _LogoWidgetState extends State<LogoWidget> {
       height: 200.h,
       width: 200.w,
     );
-    _timer = Timer.periodic(const Duration(seconds: 3), (_) => _generateNumber());
+    _timer = Timer.periodic(const Duration(seconds: 2), (_) => _generateNumber());
   }
 
   @override

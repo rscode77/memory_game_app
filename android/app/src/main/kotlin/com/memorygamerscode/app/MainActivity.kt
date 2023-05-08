@@ -1,4 +1,4 @@
-package com.example.memory_game_app
+package com.memorygamerscode.app
 
 import io.flutter.embedding.android.FlutterActivity
 
