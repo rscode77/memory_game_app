@@ -1,16 +1,15 @@
-# memory_game_app
+# Memory Game
 
-A new Flutter project.
+App available in [Google Play Store](https://play.google.com/store/apps/details?id=com.memorygamerscode.app). </br>
+Web verision at [Memory Game](https://rscode.site/app/memory/).
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Application created for development purposes
 
-A few resources to get you started if this is your first Flutter project:
+The memory game is a classic memory game where players have to discover matching pairs. Players must use their memory skills to flip over the tiles and reveal pairs of matching tiles.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![alt text](https://rscode.site/files/memorygame/11.png)
+![alt text](https://rscode.site/files/memorygame/22.png)
+![alt text](https://rscode.site/files/memorygame/33.png)
+![alt text](https://rscode.site/files/memorygame/44.png)
+![alt text](https://rscode.site/files/memorygame/55.png)
