@@ -8,8 +8,9 @@ Web verision at [Memory Game](https://rscode.site/app/memory/).
 
 The memory game is a classic memory game where players have to discover matching pairs. Players must use their memory skills to flip over the tiles and reveal pairs of matching tiles.
 
-![alt text](https://rscode.site/files/memorygame/00.png)
-![alt text](https://rscode.site/files/memorygame/11.png)
-![alt text](https://rscode.site/files/memorygame/22.png)
-![alt text](https://rscode.site/files/memorygame/33.png)
-
+<img src="https://rscode.site/files/memorygame/00.png">
+<img src="https://rscode.site/files/memorygame/11.png">
+<img src="https://rscode.site/files/memorygame/22.png">
+<img src="https://rscode.site/files/memorygame/33.png">
+<img src="https://rscode.site/files/memorygame/44.png">
+<img src="https://rscode.site/files/memorygame/55.png">
